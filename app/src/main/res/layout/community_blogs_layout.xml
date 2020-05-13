@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:padding="10dp"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/community_blog_name"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:textSize="28sp"
+        android:text="1-1-111   888888 :" />
+
+    <TextView
+        android:id="@+id/community_blog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="32sp"
+        android:text="title title title" />
+
+    <TextView
+        android:id="@+id/community_blog_contend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:text="content content content content content content content content
+            content content content content content content content content
+            content content content content content content content content
+            content content content content content content content content"/>
+
+    <LinearLayout
+        android:id="@+id/community_blog_image_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textSize="20sp"
+        android:text="#label #label #label " />
+
+    <TextView
+        android:id="@+id/community_blog_time"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="right|center"
+        android:layout_marginBottom="20dp"
+        android:textSize="24sp"
+        android:text="8888-88-88 88:88:88 8888" />
+
+
+
+
+
+</LinearLayout>

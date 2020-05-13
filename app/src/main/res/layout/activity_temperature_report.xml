@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TemperatureReportActivity">
+
+    <TextView
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="152dp"
+        android:layout_marginTop="64dp"
+        android:text="体温上报"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/ic_thermometer_icon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/temperature_report_today_temperature_msg"
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="116dp"
+        android:layout_marginTop="164dp"
+        android:gravity="center"
+        android:text="今日体温:"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/temperature_report_today_temperature_value"
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="116dp"
+        android:layout_marginTop="35dp"
+        android:gravity="center"
+        android:hint="输入数字"
+        android:textSize="24sp"
+        android:inputType="number|numberDecimal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/temperature_report_today_temperature_msg" />
+
+    <Button
+        android:id="@+id/temperature_report_today_temperature_commit"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="128dp"
+        android:layout_marginTop="35dp"
+        android:text="提交"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/temperature_report_today_temperature_value" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginTop="400dp"
+        android:background="#111111"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="116dp"
+        android:layout_marginBottom="254dp"
+        android:gravity="center"
+        android:text="历史体温"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/temperature_report_history_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
