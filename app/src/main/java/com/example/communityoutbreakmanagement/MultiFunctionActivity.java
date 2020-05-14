@@ -109,6 +109,8 @@ public class MultiFunctionActivity extends AppCompatActivity
 
     public void reminderReportTemperature() {
 
+        ReminderUtilities.scheduleChargingReminder(MultiFunctionActivity.this, identityInformation);
+
         Uri uri = TemperatureRecordsContract.TemperatureRecordsEntry.CONTENT_URI;
         uri = uri.buildUpon()
                 .appendPath(identityInformation[0])
@@ -145,8 +147,11 @@ public class MultiFunctionActivity extends AppCompatActivity
         if (!date.contains(currentTime)) {
             Toast.makeText( MultiFunctionActivity.this, "今日体温未上报", Toast.LENGTH_LONG).show();
 
+            Resident resident = new Resident("","","");
+
             Intent remindReportTemperatureIntent = new Intent(
                     MultiFunctionActivity.this, TemperatureReportReminderIntentService.class);
+            remindReportTemperatureIntent.putExtra(resident.identityAuthentication, identityInformation);
             remindReportTemperatureIntent.setAction(ReminderTasks.ACTION_REMIND_REPORT_TEMPERATURE);
             startService(remindReportTemperatureIntent);
 
