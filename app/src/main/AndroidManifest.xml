@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -21,7 +22,9 @@
             android:name=".TemperatureReportActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".PersonCenterActivity" />
-        <activity android:name=".MultiFunctionActivity" />
+        <activity
+            android:name=".MultiFunctionActivity"
+            android:launchMode="singleTop"/>
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -35,6 +38,11 @@
             android:name=".TemperatureRecordsContentProvider"
             android:authorities="com.example.communityoutbreakmanagement"
             android:exported="false" />
+
+        <service
+            android:name=".TemperatureReportReminderIntentService"
+            android:exported="false" />
+
     </application>
 
 </manifest>

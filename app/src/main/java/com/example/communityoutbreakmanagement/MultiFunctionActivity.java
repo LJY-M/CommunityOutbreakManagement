@@ -9,6 +9,8 @@ import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
@@ -22,6 +24,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import static com.example.communityoutbreakmanagement.PersonCenterActivity.getTotalCacheSize;
 
@@ -88,6 +93,8 @@ public class MultiFunctionActivity extends AppCompatActivity
         mPersonCenterHouseNumberTextView.setText(identityInformation[0]);
         mPersonCenterResidentNameTextView.setText(identityInformation[1]);
 
+        reminderReportTemperature();
+
         String cacheData = "??";
         try {
             cacheData = getTotalCacheSize(this);
@@ -98,6 +105,55 @@ public class MultiFunctionActivity extends AppCompatActivity
         System.out.println(cacheData);
 
         getSupportLoaderManager().initLoader(EPIDEMIC_DATA_SEARCH_LOADER,null,this);
+    }
+
+    public void reminderReportTemperature() {
+
+        Uri uri = TemperatureRecordsContract.TemperatureRecordsEntry.CONTENT_URI;
+        uri = uri.buildUpon()
+                .appendPath(identityInformation[0])
+                .build();
+        if (uri != null) {
+            System.out.println(uri.toString());
+            Toast.makeText( MultiFunctionActivity.this, uri.toString(), Toast.LENGTH_LONG).show();
+        }
+
+        String mSelection = TemperatureRecordsContract.TemperatureRecordsEntry.COLUMN_HOUSE_NUMBER + " =? and "
+                + TemperatureRecordsContract.TemperatureRecordsEntry.COLUMN_RESIDENT_NAME + " =?";
+        String[] mSelectionArgs = new String[]{identityInformation[0], identityInformation[1]};
+
+        Cursor mFamiliesCursor = null;     //查找家庭成员
+
+        mFamiliesCursor = getContentResolver().query(
+                uri,null,
+                mSelection, mSelectionArgs,
+                TemperatureRecordsContract.TemperatureRecordsEntry.COLUMN_RECORDS_TIME + " desc");
+
+        if (!mFamiliesCursor.moveToFirst()) {
+            return;
+        }
+
+        int dateIndex = mFamiliesCursor.getColumnIndex(TemperatureRecordsContract.TemperatureRecordsEntry.COLUMN_RECORDS_TIME);
+        String date = mFamiliesCursor.getString(dateIndex);
+
+        SimpleDateFormat sdf = new SimpleDateFormat();// 格式化时间
+        sdf.applyPattern("yyyy-MM-dd");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+08"));
+        Date today = new Date();// 获取当前时间
+        String currentTime = sdf.format(today);
+
+        if (!date.contains(currentTime)) {
+            Toast.makeText( MultiFunctionActivity.this, "今日体温未上报", Toast.LENGTH_LONG).show();
+
+            Intent remindReportTemperatureIntent = new Intent(
+                    MultiFunctionActivity.this, TemperatureReportReminderIntentService.class);
+            remindReportTemperatureIntent.setAction(ReminderTasks.ACTION_REMIND_REPORT_TEMPERATURE);
+            startService(remindReportTemperatureIntent);
+
+            NotificationUtils.reminderUserBecauseCharging(MultiFunctionActivity.this, identityInformation);
+        }
+
+
     }
 
 //    @NonNull
