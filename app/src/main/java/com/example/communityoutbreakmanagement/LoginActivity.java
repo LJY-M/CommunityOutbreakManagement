@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +32,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private Button mButtonLogin;            //登录按钮
 
+    NetworkConnectionBroadcastReceiver mNetworkConnectionBroadcastReceiver;
+    IntentFilter mNetworkConnectionIntentFilter;
+
 //    public String identityAuthentication = "identityAuthentication";
 
     @Override
@@ -53,6 +58,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         TestUtil.getAllResident(mResidentDBHelper.getWritableDatabase());
 
         TestUtil.getAllTemperatureRecords(mTemperatureRecordsDBHelper.getWritableDatabase());
+
+        mNetworkConnectionIntentFilter = new IntentFilter();
+        mNetworkConnectionBroadcastReceiver = new NetworkConnectionBroadcastReceiver();
+
+        mNetworkConnectionIntentFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);
+        mNetworkConnectionIntentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        mNetworkConnectionIntentFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+
     }
 
     @Override
