@@ -106,7 +106,7 @@ public class MultiFunctionActivity extends AppCompatActivity
 
         getSupportLoaderManager().initLoader(EPIDEMIC_DATA_SEARCH_LOADER,null,this);
     }
-
+ 
     public void reminderReportTemperature() {
 
         ReminderUtilities.scheduleChargingReminder(MultiFunctionActivity.this, identityInformation);
