@@ -17,7 +17,7 @@ public class TemperatureRecordsDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         final String SQL_CREATE_RESIDENT_TABLE = "CREATE TABLE "
                 + TemperatureRecordsContract.TemperatureRecordsEntry.TABLE_NAME + " ("
-                +TemperatureRecordsContract.TemperatureRecordsEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + TemperatureRecordsContract.TemperatureRecordsEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TemperatureRecordsContract.TemperatureRecordsEntry.COLUMN_HOUSE_NUMBER + " TEXT NOT NULL, "
                 + TemperatureRecordsContract.TemperatureRecordsEntry.COLUMN_RESIDENT_NAME + " TEXT NOT NULL, "
                 + TemperatureRecordsContract.TemperatureRecordsEntry.COLUMN_RESIDENT_TEMPERATURE + " TEXT NOT NULL, "
@@ -28,7 +28,7 @@ public class TemperatureRecordsDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + ResidentContract.ResidentEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TemperatureRecordsContract.TemperatureRecordsEntry.TABLE_NAME);
         onCreate(db);
     }
 }

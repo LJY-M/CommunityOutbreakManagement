@@ -85,7 +85,7 @@ public class TemperatureRecordsContentProvider extends ContentProvider {
 
         switch (match) {
             case TEMPERATURE_RECORDS:
-                retCursor =database.query(
+                retCursor = database.query(
                         TemperatureRecordsContract.TemperatureRecordsEntry.TABLE_NAME,
                         projection,
                         selection,

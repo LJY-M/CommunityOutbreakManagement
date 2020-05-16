@@ -176,4 +176,37 @@ public class TestUtil {
         }
 
     }
+
+    public static void getAllCommunityBlog(SQLiteDatabase db) {
+
+        Cursor cursor = db.query(
+                CommunityBlogsContract.CommunityBlogsEntry.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        ArrayList<CommunityBlogs> CommunityBlogsList = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                CommunityBlogsList.add(new CommunityBlogs(
+                        cursor.getString(cursor.getColumnIndex(CommunityBlogsContract.CommunityBlogsEntry.COLUMN_HOUSE_NUMBER)),
+                        cursor.getString(cursor.getColumnIndex(CommunityBlogsContract.CommunityBlogsEntry.COLUMN_RESIDENT_NAME)),
+                        cursor.getString(cursor.getColumnIndex(CommunityBlogsContract.CommunityBlogsEntry.COLUMN_BLOG_LABEL)),
+                        cursor.getString(cursor.getColumnIndex(CommunityBlogsContract.CommunityBlogsEntry.COLUMN_BLOG_TITLE)),
+                        cursor.getString(cursor.getColumnIndex(CommunityBlogsContract.CommunityBlogsEntry.COLUMN_BLOG_CONTENT)),
+                        cursor.getString(cursor.getColumnIndex(CommunityBlogsContract.CommunityBlogsEntry.COLUMN_BLOG_TIME))
+                ));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        for (CommunityBlogs communityBlogs : CommunityBlogsList) {
+            System.out.println(CommunityBlogsList.toString());
+        }
+
+    }
 }

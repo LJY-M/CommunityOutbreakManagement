@@ -39,8 +39,13 @@
         </activity>
 
         <provider
+            android:name=".CommunityBlogsContentProvider"
+            android:authorities="com.example.communityoutbreakmanagementBlogs"
+            android:exported="false" />
+
+        <provider
             android:name=".TemperatureRecordsContentProvider"
-            android:authorities="com.example.communityoutbreakmanagement"
+            android:authorities="com.example.communityoutbreakmanagementRecords"
             android:exported="false" />
 
         <service

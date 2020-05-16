@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private ResidentDBHelper mResidentDBHelper = new ResidentDBHelper(this);
     private TemperatureRecordsDBHelper mTemperatureRecordsDBHelper = new TemperatureRecordsDBHelper(this);
+    private CommunityBlogsDBHelper mCommunityBlogsDBHelper = new CommunityBlogsDBHelper(this);
 
     private EditText mEditTextHouseNumber;  //门牌号
     private EditText mEditTextName;         //姓名
@@ -65,6 +66,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         TestUtil.getAllResident(mResidentDBHelper.getWritableDatabase());
 
         TestUtil.getAllTemperatureRecords(mTemperatureRecordsDBHelper.getWritableDatabase());
+
+        TestUtil.getAllCommunityBlog(mCommunityBlogsDBHelper.getWritableDatabase());
 
         mNetworkConnectionIntentFilter = new IntentFilter();
         mNetworkConnectionBroadcastReceiver = new NetworkConnectionBroadcastReceiver();
