@@ -205,7 +205,7 @@ public class TestUtil {
         cursor.close();
 
         for (CommunityBlogs communityBlogs : CommunityBlogsList) {
-            System.out.println(CommunityBlogsList.toString());
+            System.out.println(communityBlogs.toString());
         }
 
     }

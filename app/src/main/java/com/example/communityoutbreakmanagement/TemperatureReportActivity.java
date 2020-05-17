@@ -119,13 +119,13 @@ public class TemperatureReportActivity extends AppCompatActivity implements
     public Loader<Cursor> onCreateLoader(int id,  Bundle args) {
         return new AsyncTaskLoader<Cursor>(this) {
 
-            Cursor mTempertureReport = null;
+            Cursor mTemperatureReport = null;
 
             @Override
             protected void onStartLoading() {
-                if (mTempertureReport != null) {
+                if (mTemperatureReport != null) {
                     // Delivers any previously loaded data immediately
-                    deliverResult(mTempertureReport);
+                    deliverResult(mTemperatureReport);
                 } else {
                     // Force a new load
                     forceLoad();
@@ -141,7 +141,7 @@ public class TemperatureReportActivity extends AppCompatActivity implements
                 String[] mSelectionArgs = {identityInformation[0], identityInformation[1]};
 
                 try {
-                    mTempertureReport = getContentResolver().query(
+                    mTemperatureReport = getContentResolver().query(
                             TemperatureRecordsContract.TemperatureRecordsEntry.CONTENT_URI,
                             null, mSelection, mSelectionArgs,
                             TemperatureRecordsContract.TemperatureRecordsEntry.COLUMN_RECORDS_TIME + " desc");
@@ -151,11 +151,11 @@ public class TemperatureReportActivity extends AppCompatActivity implements
                     return null;
                 }
 
-                return mTempertureReport;
+                return mTemperatureReport;
             }
 
             public void deliverResult(Cursor data) {
-                mTempertureReport = data;
+                mTemperatureReport = data;
                 super.deliverResult(data);
             }
         };

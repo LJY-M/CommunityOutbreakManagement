@@ -1,17 +1,31 @@
 package com.example.communityoutbreakmanagement;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.AsyncTaskLoader;
+import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MyCommunityActivity extends AppCompatActivity {
+public class MyCommunityActivity extends AppCompatActivity
+        implements LoaderManager.LoaderCallbacks<Cursor>{
+
+    private static final String TAG = MyCommunityActivity.class.getSimpleName();
+    private static final int COMMUNITY_BLOGS_LOADER_ID = 53;
 
     private String[] identityInformation;
+
+    RecyclerView mRecyclerView;
+    private MyCommunityAdapter mMyCommunityAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +42,11 @@ public class MyCommunityActivity extends AppCompatActivity {
             }
         }
 
+        mRecyclerView = findViewById(R.id.my_community_recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mMyCommunityAdapter = new MyCommunityAdapter(this);
+        mRecyclerView.setAdapter(mMyCommunityAdapter);
+
         FloatingActionButton floatingActionButton = findViewById(R.id.my_community_floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,5 +57,68 @@ public class MyCommunityActivity extends AppCompatActivity {
                 startActivity(addBlogIntent);
             }
         });
+
+        getSupportLoaderManager().initLoader(COMMUNITY_BLOGS_LOADER_ID, null, this);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // re-queries for all tasks
+        getSupportLoaderManager().restartLoader(COMMUNITY_BLOGS_LOADER_ID, null, this);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new AsyncTaskLoader<Cursor>(this) {
+
+            Cursor mCommunityBlog = null;
+
+            @Override
+            protected void onStartLoading() {
+                if (mCommunityBlog != null) {
+                    // Delivers any previously loaded data immediately
+                    deliverResult(mCommunityBlog);
+                } else {
+                    // Force a new load
+                    forceLoad();
+                }
+            }
+
+            @Override
+            public Cursor loadInBackground() {
+
+                try {
+                    mCommunityBlog = getContentResolver().query(
+                            CommunityBlogsContract.CommunityBlogsEntry.CONTENT_URI,
+                            null, null, null,
+                            CommunityBlogsContract.CommunityBlogsEntry.COLUMN_BLOG_TIME + " desc");
+                } catch (Exception e) {
+                    Log.e(TAG, "Failed to asynchronously load data.");
+                    e.printStackTrace();
+                    return null;
+                }
+
+                return mCommunityBlog;
+            }
+
+            public void deliverResult(Cursor data) {
+                mCommunityBlog = data;
+                super.deliverResult(data);
+            }
+        };
+    }
+
+    @Override
+    public void onLoadFinished( Loader<Cursor> loader, Cursor data) {
+        mMyCommunityAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mMyCommunityAdapter.swapCursor(null);
+    }
+
+
 }

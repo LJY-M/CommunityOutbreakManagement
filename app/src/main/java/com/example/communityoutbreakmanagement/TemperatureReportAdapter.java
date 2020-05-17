@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class TemperatureReportAdapter extends RecyclerView.Adapter<TemperatureReportAdapter.TemperatureReportViewHolder> {
+public class TemperatureReportAdapter
+        extends RecyclerView.Adapter<TemperatureReportAdapter.TemperatureReportViewHolder> {
 
     private Cursor mCursor;
     private Context mContext;

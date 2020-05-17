@@ -11,7 +11,7 @@
         android:id="@+id/community_blog_name"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:textSize="28sp"
+        android:textSize="24sp"
         android:text="1-1-111   888888 :" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_marginBottom="20dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textSize="32sp"
+        android:textSize="28sp"
         android:text="title title title" />
 
     <TextView
@@ -46,9 +46,10 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/community_blog_label"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:text="#label #label #label " />
 
     <TextView
