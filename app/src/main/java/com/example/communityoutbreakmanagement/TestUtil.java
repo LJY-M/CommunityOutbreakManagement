@@ -32,42 +32,49 @@ public class TestUtil {
         cv.put(ResidentContract.ResidentEntry.COLUMN_HOUSE_NUMBER, "1-1-101");
         cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_NAME, "小乔");
         cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PASSWORD, "111111");
+        cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PHONE, "13934563456");
         list.add(cv);
 
         cv = new ContentValues();
         cv.put(ResidentContract.ResidentEntry.COLUMN_HOUSE_NUMBER, "1-1-101");
         cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_NAME, "周瑜");
         cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PASSWORD, "111111");
+        cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PHONE, "13934563456");
         list.add(cv);
 
         cv = new ContentValues();
         cv.put(ResidentContract.ResidentEntry.COLUMN_HOUSE_NUMBER, "1-1-101");
         cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_NAME, "周循");
         cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PASSWORD, "111111");
+        cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PHONE, "13934563456");
         list.add(cv);
 
         cv = new ContentValues();
         cv.put(ResidentContract.ResidentEntry.COLUMN_HOUSE_NUMBER, "1-2-501");
         cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_NAME, "张良");
         cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PASSWORD, "111111");
+        cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PHONE, "13934563456");
         list.add(cv);
 
         cv = new ContentValues();
         cv.put(ResidentContract.ResidentEntry.COLUMN_HOUSE_NUMBER, "2-3-602");
         cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_NAME, "东方耀");
         cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PASSWORD, "111111");
+        cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PHONE, "13934563456");
         list.add(cv);
 
         cv = new ContentValues();
         cv.put(ResidentContract.ResidentEntry.COLUMN_HOUSE_NUMBER, "2-2-702");
         cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_NAME, "亚瑟");
         cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PASSWORD, "111111");
+        cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PHONE, "13934563456");
         list.add(cv);
 
         cv = new ContentValues();
         cv.put(ResidentContract.ResidentEntry.COLUMN_HOUSE_NUMBER, "1-3-801");
         cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_NAME, "李白");
         cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PASSWORD, "111111");
+        cv.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PHONE, "13934563456");
         list.add(cv);
 
         //insert all guests in one transaction
@@ -110,7 +117,8 @@ public class TestUtil {
                 residentList.add(new Resident(
                         cursor.getString(cursor.getColumnIndex(ResidentContract.ResidentEntry.COLUMN_HOUSE_NUMBER)),
                         cursor.getString(cursor.getColumnIndex(ResidentContract.ResidentEntry.COLUMN_RESIDENT_NAME)),
-                        cursor.getString(cursor.getColumnIndex(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PASSWORD))
+                        cursor.getString(cursor.getColumnIndex(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PASSWORD)),
+                        cursor.getString(cursor.getColumnIndex(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PHONE))
                 ));
             } while (cursor.moveToNext());
         }

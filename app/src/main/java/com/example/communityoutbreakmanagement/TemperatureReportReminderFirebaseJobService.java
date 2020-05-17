@@ -18,7 +18,7 @@ public class TemperatureReportReminderFirebaseJobService extends JobService {
     @Override
     public boolean onStartJob(final JobParameters job) {
 
-        Resident resident = new Resident("","","");
+        Resident resident = new Resident("","","", "");
         Bundle bundle = job.getExtras();
         identityInformation = new String[]{
                 bundle.getString(resident.identityAuthentication + "0"),

@@ -54,7 +54,7 @@ public class MyCommunityActivity extends AppCompatActivity
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Resident residentAB = new Resident("","","");
+                Resident residentAB = new Resident("","","", "");
                 Intent addBlogIntent = new Intent(MyCommunityActivity.this,AddBlogActivity.class);
                 addBlogIntent.putExtra(residentAB.identityAuthentication, identityInformation);
                 startActivity(addBlogIntent);

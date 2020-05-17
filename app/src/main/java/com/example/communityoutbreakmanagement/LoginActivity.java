@@ -122,9 +122,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, myLocationListener);
 //        Location loc = LocationManager.getLastKnownLocation("gps");
         Location loc = locationManager.getLastKnownLocation("gps");
-        loc.getLatitude();  //维度
-        loc.getLongitude(); //经度
-        System.out.println("经度：" + loc.getLatitude() + "，纬度：" + loc.getLongitude());
+        double latitude = loc.getLatitude();  //维度
+        double longitude = loc.getLongitude(); //经度
+        System.out.println("经度：" + latitude + "，纬度：" + longitude);
+        if (latitude > 29.58 && latitude < 31.22
+                && longitude >113.41 && longitude < 115.05) {
+            Toast.makeText(this, "授权区域允许登录", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            mButtonLogin.setClickable(false);
+            Toast.makeText(this, "未授权区域不允许登录", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -140,7 +148,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     String houseNumber = mEditTextHouseNumber.getText().toString();
                     String residentName = mEditTextName.getText().toString();
                     String[] identityInformation  = {houseNumber, residentName};
-                    Resident resident = new Resident("","","");
+                    Resident resident = new Resident("","","", "");
                     //跳转界面
                     Intent intentToMultiFunctionActivity = new Intent(LoginActivity.this, MultiFunctionActivity.class);
                     intentToMultiFunctionActivity.putExtra(resident.identityAuthentication,identityInformation);

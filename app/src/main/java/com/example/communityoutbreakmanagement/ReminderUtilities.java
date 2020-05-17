@@ -27,7 +27,7 @@ public class ReminderUtilities {
 
     synchronized public static void scheduleChargingReminder(@NonNull final Context context, String[] identity) {
 
-        Resident resident = new Resident("","","");
+        Resident resident = new Resident("","","", "");
         Bundle bundle = new Bundle();
         bundle.putString(resident.identityAuthentication + "0", identity[0]);
         bundle.putString(resident.identityAuthentication + "1", identity[1]);

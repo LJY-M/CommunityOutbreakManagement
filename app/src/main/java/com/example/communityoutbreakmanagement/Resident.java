@@ -9,6 +9,15 @@ class Resident implements Serializable {
     private String houseNumber;
     private String residentName;
     private String residentPassword;
+    private String residentPhone;
+
+    public String getResidentPhone() {
+        return residentPhone;
+    }
+
+    public void setResidentPhone(String residentPhone) {
+        this.residentPhone = residentPhone;
+    }
 
     public String getResidentPassword() {
         return residentPassword;
@@ -34,10 +43,11 @@ class Resident implements Serializable {
         this.residentName = residentName;
     }
 
-    public Resident(String houseNumber, String residentName, String residentPassword) {
+    public Resident(String houseNumber, String residentName, String residentPassword, String residentPhone) {
         this.houseNumber = houseNumber;
         this.residentName = residentName;
         this.residentPassword = residentPassword;
+        this.residentPhone = residentPhone;
     }
 
     @Override
@@ -46,6 +56,7 @@ class Resident implements Serializable {
                 "houseNumber='" + houseNumber + '\'' +
                 ", residentName='" + residentName + '\'' +
                 ", residentPassword='" + residentPassword + '\'' +
+                ", residentPhone='" + residentPhone + '\'' +
                 '}';
     }
 }

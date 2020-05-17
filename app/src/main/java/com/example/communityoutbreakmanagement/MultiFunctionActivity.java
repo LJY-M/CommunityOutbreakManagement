@@ -147,7 +147,7 @@ public class MultiFunctionActivity extends AppCompatActivity
         if (!date.contains(currentTime)) {
             Toast.makeText( MultiFunctionActivity.this, "今日体温未上报", Toast.LENGTH_LONG).show();
 
-            Resident resident = new Resident("","","");
+            Resident resident = new Resident("","","", "");
 
             Intent remindReportTemperatureIntent = new Intent(
                     MultiFunctionActivity.this, TemperatureReportReminderIntentService.class);
@@ -300,25 +300,25 @@ public class MultiFunctionActivity extends AppCompatActivity
         int id = v.getId();
         switch (id) {
             case R.id.multi_image_button_person_center:
-                Resident residentPC = new Resident("","","");
+                Resident residentPC = new Resident("","","", "");
                 Intent intentToPersonCenterActivity = new Intent(MultiFunctionActivity.this, PersonCenterActivity.class);
                 intentToPersonCenterActivity.putExtra(residentPC.identityAuthentication, identityInformation);
                 startActivity(intentToPersonCenterActivity);
                 break;
             case R.id.multi_image_button_temperature_report:
-                Resident residentTR = new Resident("","","");
+                Resident residentTR = new Resident("","","", "");
                 Intent intentToTemperatureReportActivity = new Intent(MultiFunctionActivity.this, TemperatureReportActivity.class);
                 intentToTemperatureReportActivity.putExtra(residentTR.identityAuthentication, identityInformation);
                 startActivity(intentToTemperatureReportActivity);
                 break;
             case R.id.multi_image_button_my_family:
-                Resident residentMF = new Resident("","","");
+                Resident residentMF = new Resident("","","", "");
                 Intent intentToMyFamilyActivity = new Intent(MultiFunctionActivity.this, MyFamilyActivity.class);
                 intentToMyFamilyActivity.putExtra(residentMF.identityAuthentication, identityInformation);
                 startActivity(intentToMyFamilyActivity);
                 break;
             case R.id.multi_image_button_my_community:
-                Resident residentMC = new Resident("","","");
+                Resident residentMC = new Resident("","","", "");
                 Intent intentToMyCommunityActivity = new Intent(MultiFunctionActivity.this, MyCommunityActivity.class);
                 intentToMyCommunityActivity.putExtra(residentMC.identityAuthentication, identityInformation);
                 startActivity(intentToMyCommunityActivity);

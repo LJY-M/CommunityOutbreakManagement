@@ -28,8 +28,11 @@ public class PersonCenterActivity extends AppCompatActivity implements View.OnCl
     private TextView mResidentNameTextView;
     private TextView mHouseNumberTextView;
     private TextView mResidentNowPasswordTextView;
-    private EditText mResdentPasswordEditView;
+    private EditText mResidentPasswordEditView;
     private Button mNewPasswordButton;
+    private TextView mResidentNowPhoneTextView;
+    private EditText mResidentPhoneEditView;
+    private Button mNewPhoneButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +52,19 @@ public class PersonCenterActivity extends AppCompatActivity implements View.OnCl
         mResidentNameTextView = findViewById(R.id.per_cen_resident_name);
         mHouseNumberTextView = findViewById(R.id.per_cen_house_number);
         mResidentNowPasswordTextView = findViewById(R.id.per_cen_resident_password_now);
-        mResdentPasswordEditView = findViewById(R.id.per_cen_resident_password_edit);
+        mResidentPasswordEditView = findViewById(R.id.per_cen_resident_password_edit);
         mNewPasswordButton = findViewById(R.id.per_cen_new_password_commit);
         mNewPasswordButton.setOnClickListener(this);
+
+        mResidentNowPhoneTextView = findViewById(R.id.per_cen_resident_phone_now);
+        mResidentPhoneEditView = findViewById(R.id.per_cen_resident_phone_edit);
+        mNewPhoneButton = findViewById(R.id.per_cen_new_phone_commit);
+        mNewPhoneButton.setOnClickListener(this);
 
         mResidentNameTextView.setText(identityInformation[0]);
         mHouseNumberTextView.setText(identityInformation[1]);
 
-        queryUserPasswordByHNRNAndUpdateUI(mResidentDBHelper.
+        queryUserPasswordAndPhoneByHNRNAndUpdateUI(mResidentDBHelper.
                 getWritableDatabase(),identityInformation[0],identityInformation[1]);
 
         String cacheData = "??";
@@ -69,8 +77,9 @@ public class PersonCenterActivity extends AppCompatActivity implements View.OnCl
         System.out.println(cacheData);
     }
 
-    public void queryUserPasswordByHNRNAndUpdateUI(SQLiteDatabase sqLiteDatabase, String houseNumber, String residentName) {
+    public void queryUserPasswordAndPhoneByHNRNAndUpdateUI(SQLiteDatabase sqLiteDatabase, String houseNumber, String residentName) {
         String userPassword;
+        String userPhone;
         Cursor cursor =  sqLiteDatabase.rawQuery("select * from " +
                 ResidentContract.ResidentEntry.TABLE_NAME +
                 " where " + ResidentContract.ResidentEntry.COLUMN_HOUSE_NUMBER +
@@ -78,7 +87,9 @@ public class PersonCenterActivity extends AppCompatActivity implements View.OnCl
                 " = ?", new String[]{houseNumber, residentName});
         if (cursor.moveToFirst()) {
             userPassword = cursor.getString(cursor.getColumnIndex(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PASSWORD));
+            userPhone = cursor.getString(cursor.getColumnIndex(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PHONE));
             mResidentNowPasswordTextView.setText(userPassword);
+            mResidentNowPhoneTextView.setText(userPhone);
         }
     }
 
@@ -92,12 +103,22 @@ public class PersonCenterActivity extends AppCompatActivity implements View.OnCl
                 , whereString, new String[]{houseNumber, residentName});
     }
 
+    public void updateUserPhone(SQLiteDatabase sqLiteDatabase, String houseNumber
+            , String residentName, String residentNewPhone) {
+        ContentValues values = new ContentValues();
+        values.put(ResidentContract.ResidentEntry.COLUMN_RESIDENT_PHONE, residentNewPhone);
+        String whereString = ResidentContract.ResidentEntry.COLUMN_HOUSE_NUMBER + "=? AND "
+                + ResidentContract.ResidentEntry.COLUMN_RESIDENT_NAME + "=?";
+        sqLiteDatabase.update(ResidentContract.ResidentEntry.TABLE_NAME, values
+                , whereString, new String[]{houseNumber, residentName});
+    }
+
     @Override
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
             case R.id.per_cen_new_password_commit:
-                String newPassword = mResdentPasswordEditView.getText().toString();
+                String newPassword = mResidentPasswordEditView.getText().toString();
                 if (newPassword.equals("")) {
                     Toast.makeText(this, "新密码输入为空", Toast.LENGTH_SHORT).show();
                     Log.i(this.getClass().getName(), "新密码输入为空");
@@ -106,11 +127,23 @@ public class PersonCenterActivity extends AppCompatActivity implements View.OnCl
                     updateUserPassword(mResidentDBHelper.
                             getWritableDatabase(),identityInformation[0],
                             identityInformation[1], newPassword);
-                    queryUserPasswordByHNRNAndUpdateUI(mResidentDBHelper.
+                    queryUserPasswordAndPhoneByHNRNAndUpdateUI(mResidentDBHelper.
                             getWritableDatabase(),identityInformation[0],identityInformation[1]);
                 }
-
                 break;
+            case R.id.per_cen_new_phone_commit:
+                String newPhone = mResidentPhoneEditView.getText().toString();
+                if (newPhone.equals("")) {
+                    Toast.makeText(this, "新号码输入为空", Toast.LENGTH_SHORT).show();
+                    Log.i(this.getClass().getName(), "新号码输入为空");
+                    break;
+                } else {
+                    updateUserPhone(mResidentDBHelper.
+                                    getWritableDatabase(),identityInformation[0],
+                            identityInformation[1], newPhone);
+                    queryUserPasswordAndPhoneByHNRNAndUpdateUI(mResidentDBHelper.
+                            getWritableDatabase(),identityInformation[0],identityInformation[1]);
+                }
         }
 
 

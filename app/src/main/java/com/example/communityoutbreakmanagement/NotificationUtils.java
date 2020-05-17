@@ -57,7 +57,7 @@ public class NotificationUtils {
 
     private static PendingIntent contentIntent(Context context, String[] identityInformation) {
 
-        Resident resident = new Resident("","","");
+        Resident resident = new Resident("","","", "");
         Intent startTemperatureReportActivityIntent = new Intent(context, TemperatureReportActivity.class);
         startTemperatureReportActivityIntent.putExtra(resident.identityAuthentication, identityInformation);
 
