@@ -4,14 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -57,6 +60,41 @@ public class MyCommunityActivity extends AppCompatActivity
                 startActivity(addBlogIntent);
             }
         });
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+
+                int id = (int) viewHolder.itemView.getTag();
+                String stringId = Integer.toString(id);
+
+                Uri uri = CommunityBlogsContract.CommunityBlogsEntry.CONTENT_URI;
+
+                TextView numberAndNameTextView = viewHolder.itemView.findViewById(R.id.community_blog_name);
+                String numberAndName = numberAndNameTextView.getText().toString();
+                if (numberAndName.contains(identityInformation[0])
+                        && numberAndName.contains(identityInformation[1])) {
+
+                    String where = CommunityBlogsContract.CommunityBlogsEntry._ID + " =? ";
+                    String[] whereArgs = new String[]{stringId};
+                    System.out.println("进行删除操作");
+
+                    getContentResolver().delete(uri, where, whereArgs);
+                }
+                else {
+                    Toast.makeText(MyCommunityActivity.this, "没有操作权限", Toast.LENGTH_SHORT).show();
+                    System.out.println("没有操作权限");
+                }
+                getSupportLoaderManager().restartLoader(
+                        COMMUNITY_BLOGS_LOADER_ID, null, MyCommunityActivity.this);
+
+            }
+        }).attachToRecyclerView(mRecyclerView);
 
         getSupportLoaderManager().initLoader(COMMUNITY_BLOGS_LOADER_ID, null, this);
     }
