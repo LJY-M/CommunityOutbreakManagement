@@ -304,7 +304,7 @@
         android:layout_height="150dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="564dp"
-        android:background="#A6AAAAAA"
+        android:background="@drawable/shadow_orange"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -357,16 +357,16 @@
         android:layout_height="150dp"
         android:layout_marginLeft="216dp"
         android:layout_marginTop="564dp"
-        android:background="#A6AAAAAA"
+        android:background="@drawable/shadow_yellow"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/multi_image_button_my_community"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginLeft="52dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/ic_people_black_50dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -374,8 +374,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="68dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="100dp"
 
             android:text="我的社区"
             android:textSize="24sp"
@@ -390,16 +390,16 @@
 
         android:layout_marginLeft="16dp"
         android:layout_marginTop="396dp"
-        android:background="#A6AAAAAA"
+        android:background="@drawable/shadow_blue"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/multi_image_button_temperature_report"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginLeft="52dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/ic_thermometer_icon"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -407,8 +407,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="68dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="100dp"
 
             android:text="体温上报"
             android:textSize="24sp"
@@ -423,16 +423,16 @@
         android:layout_marginLeft="216dp"
 
         android:layout_marginTop="396dp"
-        android:background="#A6AAAAAA"
+        android:background="@drawable/shadow_green"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/multi_image_button_my_family"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginLeft="52dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/ic_domain_black_50dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -440,8 +440,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="68dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="100dp"
 
             android:text="我的家庭"
             android:textSize="24sp"

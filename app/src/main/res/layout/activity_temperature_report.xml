@@ -58,6 +58,7 @@
         android:layout_height="50dp"
         android:layout_marginLeft="128dp"
         android:layout_marginTop="35dp"
+        android:background="@drawable/shadow_green"
         android:text="提交"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"

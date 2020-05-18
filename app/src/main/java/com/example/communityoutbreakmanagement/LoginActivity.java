@@ -130,7 +130,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this, "授权区域允许登录", Toast.LENGTH_SHORT).show();
         }
         else {
-            mButtonLogin.setClickable(false);
+//            mButtonLogin.setClickable(false);
             Toast.makeText(this, "未授权区域不允许登录", Toast.LENGTH_SHORT).show();
         }
     }
