@@ -24,6 +24,7 @@
             android:id="@+id/family_info_layout_remind"
             android:layout_width="150dp"
             android:layout_height="50dp"
+            android:background="@drawable/shadow_green"
             android:textSize="20sp"
             android:text="提醒上报"/>
 
