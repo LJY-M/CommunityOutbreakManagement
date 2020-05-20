@@ -42,6 +42,7 @@ public class MyFamilyActivity extends AppCompatActivity {
         }
 
         mHouseNumberTextView = findViewById(R.id.my_family_house_number_value);
+        mHouseNumberTextView.setText(identityInformation[0]);
 
         mRecyclerView = findViewById(R.id.my_family_relevant_information_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
